@@ -19,11 +19,13 @@ final class ReflectorFactory
     {
         // handle defaults
         if (false !== getenv('GITHUB_ACTION')) {
+            $dsn = getenv('DBA_DSN') ?: 'mysql';
             $host = getenv('DBA_HOST') ?: '127.0.0.1';
             $user = getenv('DBA_USER') ?: 'root';
             $password = getenv('DBA_PASSWORD') ?: 'root';
             $dbname = getenv('DBA_DATABASE') ?: 'phpstan_dba';
         } else {
+            $dsn = getenv('DBA_DSN') ?: 'mysql';
             $host = getenv('DBA_HOST') ?: 'mysql80.ab';
             $user = getenv('DBA_USER') ?: 'testuser';
             $password = getenv('DBA_PASSWORD') ?: 'test';
@@ -54,7 +56,7 @@ final class ReflectorFactory
                 $reflector = new MysqliQueryReflector($mysqli);
                 $schemaHasher = new SchemaHasherMysql($mysqli);
             } elseif ('pdo' === $reflector) {
-                $pdo = new PDO(sprintf('mysql:dbname=%s;host=%s', $dbname, $host), $user, $password);
+                $pdo = new PDO(sprintf('%s:dbname=%s;host=%s', $dsn, $dbname, $host), $user, $password);
                 $reflector = new PdoQueryReflector($pdo);
                 $schemaHasher = new SchemaHasherMysql($pdo);
             } else {
