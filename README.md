@@ -109,3 +109,4 @@ includes:
 - [PGSQL Support](https://github.com/staabm/phpstan-dba/blob/main/docs/pgsql.md)
 - [Reflector Overview](https://github.com/staabm/phpstan-dba/blob/main/docs/reflectors.md)
 - [How to analyze a PHP 7.x codebase?](https://github.com/staabm/phpstan-dba/blob/main/docs/faq.md)
+- [Contributing](https://github.com/staabm/phpstan-dba/blob/main/docs/contributing.md)
